@@ -31,7 +31,7 @@ cursor = conn.cursor()
 
 f = tempfile.NamedTemporaryFile(mode='w+b')
 
-f.write('''
+f.write(b'''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +69,7 @@ folders = folders[8:-5]
 
 # f.write('</h3>')
 
-f.write('<div id="accordion">\n')
+f.write(b'<div id="accordion">\n')
 
 bookmarks = OrderedDict()
 
@@ -79,13 +79,13 @@ for id in folders:
         % (id[0])).fetchall())
 
 for key in bookmarks:
-    f.write('<h3>' + key + '</h3>\n' + '<div id="' + key + '">\n' + '<ol>\n')
+    f.write(('<h3>' + key + '</h3>\n' + '<div id="' + key + '">\n' + '<ol>\n').encode())
     for item in bookmarks[key]:
-        link = ('<li><a href="%s" target="_blank">%s</a></li>\n') % (item[1].encode('utf8'), item[0].encode('utf8'))
-        f.write(link)
-    f.write('</ol>' + '</div>\n')
+        link = ('<li><a href="%s" target="_blank">%s</a></li>\n') % (item[1], item[0])
+        f.write(link.encode())
+    f.write(('</ol>' + '</div>\n').encode())
 
-f.write('''
+f.write(b'''
 </div>
 </body>
 </html>
@@ -98,7 +98,7 @@ if use_scp is True:
             ":" + scp_filename])
 elif use_scp is False:
     outfile = open('bookmarks.html', 'w')
-    outfile.write(f.read())
+    outfile.write(f.read().decode())
     outfile.close()
 
 f.close()

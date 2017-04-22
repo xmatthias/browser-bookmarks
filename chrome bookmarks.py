@@ -9,11 +9,11 @@ import codecs
 import tempfile
 
 use_growl = False
-use_scp = True
+use_scp = False
 
 # get name of current logged in user for OS X in orde to help determine the proper
 # Chrome/Chromium path.
-user = os.getlogin()
+#user = os.getlogin()
 
 #For Google Chrome use:
 #input_filename = "/Users/%s/Library/Application Support/Google/Chrome/Default/Bookmarks" % user
@@ -23,7 +23,7 @@ input_filename = "/Users/%s/Library/Application Support/Chromium/Default/Bookmar
 
 # Destination filename/folder
 # This will be deleted afterwards if sent via SCP (use_scp is True)
-output_filename = "/Users/%s/Desktop/chrome-bookmarks.html" % user
+output_filename = "chrome-bookmarks2.html"
 
 if use_scp is True:
 	import subprocess
